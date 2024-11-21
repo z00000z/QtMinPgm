@@ -4,20 +4,23 @@ project(YezhuConverter VERSION 1.0)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-# set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
-set(CMAKE_WIN32_EXECUTABLE ON)
-
-# undefined reference to `vtable for MainWindow'
-set(CMAKE_AUTORCC ON)
-set(CMAKE_AUTOUIC ON)
-set(CMAKE_AUTOMOC ON)
-
 # build type
 if(DEFINED CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE} CACHE STRING "Set to either \"Release\" or \"Debug\"")
 else()
     set(CMAKE_BUILD_TYPE Release CACHE STRING "Set to either \"Release\" or \"Debug\"")
 endif()
+
+if( CMAKE_BUILD_TYPE STREQUAL "Debug" )
+else()
+    set(CMAKE_WIN32_EXECUTABLE ON)
+endif()
+
+
+# undefined reference to `vtable for MainWindow'
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTOMOC ON)
 
 
 set(PROJECT_NAME QtMinPgm)
