@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(YezhuConverter VERSION 1.0)
+project(QtMinPgm VERSION 1.0)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
@@ -11,25 +11,24 @@ else()
     set(CMAKE_BUILD_TYPE Release CACHE STRING "Set to either \"Release\" or \"Debug\"")
 endif()
 
-if( CMAKE_BUILD_TYPE STREQUAL "Debug" )
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
 else()
     set(CMAKE_WIN32_EXECUTABLE ON)
 endif()
 
-
-# undefined reference to `vtable for MainWindow'
+# undefined reference to `vtable for mainwindow'
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
-
 
 set(PROJECT_NAME QtMinPgm)
 
 set(SOURCE_DIR src)
 set(SOURCE_FILE
     ${SOURCE_DIR}/main.cpp
-    ${SOURCE_DIR}/MainWindow.h
-    ${SOURCE_DIR}/MainWindow.cpp
+    ${SOURCE_DIR}/mainwindow.h
+    ${SOURCE_DIR}/mainwindow.cpp
+    ${SOURCE_DIR}/mainwindow.ui
 )
 
 # 查找 Qt6 库
@@ -38,11 +37,13 @@ find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets)
 # 添加可执行文件
 add_executable(${PROJECT_NAME} ${SOURCE_FILE})
 
-# 
+#
 target_include_directories(${PROJECT_NAME} PRIVATE include)
 
 # 链接 Qt6 库
 target_link_libraries(${PROJECT_NAME}
+    PRIVATE
+
     # Qt6::Core
     # Qt6::Gui
     Qt6::Widgets
